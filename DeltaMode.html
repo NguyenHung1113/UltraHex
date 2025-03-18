@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Support Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff0000, #8b0000, #ff4500);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+        
+        @keyframes backgroundAnimation {
+            from { background-position: 0% 50%; }
+            to { background-position: 100% 50%; }
+        }
+        
+        h1 {
+            color: #ffcc00;
+            text-shadow: 0 0 15px #ffcc00;
+            animation: glow 1.5s infinite alternate, bounce 2s infinite, rainbow 3s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffcc00; }
+            to { text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes rainbow {
+            0% { color: red; }
+            25% { color: yellow; }
+            50% { color: green; }
+            75% { color: blue; }
+            100% { color: violet; }
+        }
+        
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 300px;
+            margin: auto;
+            display: none;
+        }
+        
+        .button {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+        
+        .red { background: red; color: white; box-shadow: 0 0 10px red; }
+        .blue { background: blue; color: white; box-shadow: 0 0 10px blue; }
+        .active { background: green !important; box-shadow: 0 0 20px green !important; transform: scale(1.1); }
+        .button:hover { transform: scale(1.1); }
+        
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s;
+        }
+        
+        .login-box {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        .login-box input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            text-align: center;
+        }
+        
+        .login-box button {
+            padding: 10px;
+            background: lime;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .status-bar {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: gray;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            display: none;
+        }
+        
+        .status-active {
+            background: green !important;
+            color: white;
+            box-shadow: 0 0 20px green;
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <h2>Enter Key</h2>
+            <input type="text" id="keyInput" placeholder="Enter Key">
+            <button onclick="checkKey()">Submit</button>
+        </div>
+    </div>
+
+    <h1>DeltaMode</h1>
+    <div class="button-container" id="featureButtons">
+        <button class="blue button" onclick="toggleFeature(this, 'com.accpt_ffxbase64_HaiDang_allow.list=1000')">REGEDIT 1.0</button>
+        <button class="red button" onclick="toggleFeature(this, 'com.adt_xbaseff64_HaiDang_act.list=16640')">REGEDIT 2.0</button>
+        <button class="red button" onclick="toggleFeature(this, 'com.ptspeed_HaiDang_Key_allow.list=90')">AIMLOCK V1</button>
+        <button class="blue button" onclick="toggleFeature(this, 'com.feebasex64_HaiDang_allow.list=240')">AIMLOCK V2</button>
+    </div>
+
+    <div class="status-bar" id="statusBar">Status: All Features Off</div>
+    
+    <script>
+        function checkKey() {
+            let key = document.getElementById('keyInput').value;
+            if (key === "1111") {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('featureButtons').style.display = 'grid';
+            } else {
+                alert('Invalid Key');
+            }
+        }
+
+        function toggleFeature(button, feature) {
+            button.classList.toggle("active");
+            let statusBar = document.getElementById("statusBar");
+            if (button.classList.contains("active")) {
+                statusBar.textContent = "Succesfully Activated";
+                statusBar.classList.add("status-active");
+            } else {
+                statusBar.textContent = "Status: All Features Off";
+                statusBar.classList.remove("status-active");
+            }
+            statusBar.style.display = "block";
+        }
+    </script>
+</body>
+</html>
